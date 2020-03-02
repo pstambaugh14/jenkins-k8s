@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+#  remote_user: user
+  gather_facts: true
+  #vars_prompt:
+#
+#    - name: mongoURI
+#      prompt: "What is your Mongodb URI"
+#      private: no
+#
+#    - name: username
+#      prompt: "What is your Mongodb username?"
+#      private: no
+#
+#    - name: password
+#      prompt: "What is your Mongodb password?"
+###
+#  vars:
+#    username: "{{ username }}"
+#    password: "{{ password }}"
+#    mongoURI: "{{ mongoURI }}"
+#    remote_install_path: /opt/test/MERN-AUTH-ANSIBLE
+    ###
+#    PWD:
+  tasks:
+  - name: Create Namespace for Jenkins
+    shell: ./01-create-ns-jenkins.sh
+  - name: Create Volume for Jenkins
+    shell: ./02-create-volume-jenkins.sh
+  - name: Create Persistent Volume Claim for Jenkins
+    shell: ./03-create-PVC-jenkins.sh
+  - name: Deploy Jenkins Deployment
+    shell: ./04-create-deployment-jenkins.sh
+  - name: Create Jenkins Service
+    shell: ./05-create-service-jenkins.sh
+  - name: Create Service Account for Jenkins
+    shell: ./06-create-SA-jenkins.sh
+  - name: Get the URL of Jenkins and Open in Browser
+    shell: ./service_connect.sh  

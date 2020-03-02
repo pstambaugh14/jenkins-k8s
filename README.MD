@@ -1,4 +1,4 @@
-# Jenkins K8S Deployment
+# Jenkins K8S Deployment - https://github.com/pstambaugh14/jenkins-k8s
 
 Basic Jenkins Deployment for Developers for Kubernetes/MiniKube
 
@@ -35,8 +35,7 @@ Patrick Stambaugh, Docker, DockerHub, Git, GitHub, Anible, Google/Alphabet Kuber
 ## License
 
 Created by Patrick Stambaugh.
-https://github.com/pstambaugh14/jenkins-k8s-deployment
-
+https://github.com/pstambaugh14/jenkins-k8s
 
 ## Configuration
 

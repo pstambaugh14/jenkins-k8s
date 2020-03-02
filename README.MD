@@ -1,4 +1,4 @@
-# Jenkins K8S Deployment - https://github.com/pstambaugh14/jenkins-k8s
+# Jenkins K8S Deployment - pstambaugh14/jenkins-k8s
 
 Basic Jenkins Deployment for Developers for Kubernetes/MiniKube
 

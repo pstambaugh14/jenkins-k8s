@@ -10,17 +10,11 @@ echo ""
 url="http://$hostip:$serviceport"
 echo "Access $url to visit your Jenkins instance!"
 echo ""
-#read -p "Would you like to open Jenkins in your default browser? Press 'y' for 'Yes', 'n' for 'No'..." browseyesno
-
-#read -n1 -p "Would you like to open Jenkins in your default browser? Press 'y' for 'Yes', 'n' for 'No'... [y,n]" browseyesno
 echo ""
-
-#typeset -l $browseyesno
-#if $browseyesno=y || $browseyesno=Y || $browseyesno=Yes ||
-
 
 read -n1 -sp "Would you like to open Jenkins in your default browser? Press 'y' for 'Yes', 'n' for 'No'... [y,n]" browseyesno
 echo ""
+
 
 while true;
 do

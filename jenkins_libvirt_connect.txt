@@ -3,3 +3,5 @@ qemu+ssh://patrick@192.168.122.119:22/system?no_tty=1
 jenkins/jnlp-slave jenkinsci/slave!!!
 
 qemu+ssh://patrick@192.168.122.119:22/system?keyfile=/home/patrick/.ssh/github&no_verify=1
+
+testing .gitignore...

@@ -12,32 +12,51 @@ spec:
   selector:
     app: jenkins
 
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: jenkins-headless-service
-#  namespace: jenkins
-#spec:
-#  clusterIP: None
-#  selector:
-#    app: jenkins
-#  ports:
-#    - protocol: TCP
-#      port: 50000
-#      targetPort: 50000
+---
 
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: jenkins-sshd
-#  namespace: jenkins
-#spec:
-#  type: ClusterIP
-#  ports:
-#    - port: 8888
-#      targetPort: 8888
-#  selector:
-#    app: jenkins
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-headless-service
+  namespace: jenkins
+spec:
+  clusterIP: None
+  selector:
+    app: jenkins
+  ports:
+    - protocol: TCP
+      port: 50000
+      targetPort: 50000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-sshd
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8888
+      targetPort: 8888
+  selector:
+    app: jenkins
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-jnlp
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50000
+      targetPort: 50000
+  selector:
+    app: jenkins
 
 #---
 
@@ -51,19 +70,6 @@ spec:
 #  ports:
 #    - port: 8888
 #      targetPort: 8888
-#  selector:
-#    app: jenkins
-
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: jenkins-jnlp
-#  namespace: jenkins
-#spec:
-#  type: ClusterIP
-#  ports:
-#    - port: 50000
-#      targetPort: 50000
 #  selector:
 #    app: jenkins
 #---

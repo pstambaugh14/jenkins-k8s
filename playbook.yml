@@ -49,10 +49,12 @@
     shell: ./06-create-SA-jenkins.sh
   - name: Test phase for vars being passed.
     debug: msg="{{ lookup('env','brwsrpromptansvar') }} is an environment variable"
-  - name: Get the URL of Jenkins and Open in Browser
-    shell: ./service_connect.sh
-  - name: Complete!
-    shell: echo "All is complete, now run ./service_connect.sh to easily find your Jenkins URL."
+  - name: Echo Message
+    echo: "To connect to your Jenkins instance in Browser run the following: './service_connect.sh'"
+#  - name: Get the URL of Jenkins and Open in Browser
+#    shell: ./service_connect.sh
+#  - name: Complete!
+#    shell: echo "All is complete, now run ./service_connect.sh to easily find your Jenkins URL."
 #  - name: Printenv
 #    shell: printenv
 #  - name: Display URL to access new Jenkins instance on k8s!

@@ -1,12 +1,15 @@
 #!/bin/bash
-pvcvar=kubectl get pvc -n jenkins |grep -i jenk | awk '{ print $ 1}'
+pvcvar=`kubectl get pvc -n jenkins |grep -i jenk | awk '{ print $ 1}'`
 #if [[ $pvcvar =~ '^jenk*' ]]; then
-if [[ "$nsvar" != 'jenkins' ]]; then 
+#if [[ "$nsvar" != 'jenkins' ]]; then
+echo $pvcvar
+if [[ $pvcvar != 'jenks-pv-volume' ]]
+then
   echo "PersistentVolumeClaim does not Exist, Will Create PersistentVolumeClaim..."
   kubectl create -f jenkins-PVC.yaml
 else
   echo "PersistentVolumeClaim already exists... exiting"
-  break
+#  break
 fi
 
 export pvcvar=$pvcvar

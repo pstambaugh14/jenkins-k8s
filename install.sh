@@ -1,6 +1,6 @@
 #!/bin/bash
 #ansible-playbook -vvvv playbook.yml
-
+eval $(minikube docker-env)
 ./01-create-ns-jenkins.sh
 ./02-create-volume-jenkins.sh
 ./03-create-PVC-jenkins.sh

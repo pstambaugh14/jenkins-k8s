@@ -4,7 +4,8 @@ hostip=`kubectl get pods -n jenkins -o yaml | grep -i hostip | awk '{ print $2 }
 echo "$hostip is the IP address of the Jenkins service."
 echo ""
 echo "Getting the Jenkins accessible Port... "
-serviceport=`kubectl get service -n jenkins -o json |grep -i nodePort | awk '{ print $ 2 }' | sed 's/\,//g' | head -n 01`
+#serviceport=`kubectl get service -n jenkins -o json |grep -i nodePort | awk '{ print $ 2 }' | sed 's/\,//g' | head -n 01`
+serviceport=`kubectl get service -n jenkins -o json | grep -i port | awk '{ print $ 2 }' | sed 's/\[//g' | sed 's/\,//g' | tail -n 02 | head -n -01`
 echo "$serviceport is the port used by Jenkins service."
 echo ""
 url="http://$hostip:$serviceport"

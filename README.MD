@@ -22,6 +22,8 @@ This project uses the following technologies:
 
 # New Goals:
 - Clean up Code and Make more Universally configured.
+- Configure DNS Entry for Jenkins Deployment Master.
+- Reconfigure to deploy Jenkins slaves. 
 
 -----------------------------------------------------------------------------------------------------------------------------
 

@@ -80,8 +80,8 @@ spec:
               containerPort: 8080
             - name: jnlp-port
               containerPort: 50000
-            - name: SSH-port
-              containerPort: 8888  
+            - name: ssh-port
+              containerPort: 8888
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home

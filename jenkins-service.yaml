@@ -43,3 +43,18 @@ spec:
       targetPort: 50000
   selector:
     app: jenkins
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-sshd
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8888
+      targetPort: 8888
+  selector:
+    app: jenkins      

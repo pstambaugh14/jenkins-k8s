@@ -9,7 +9,7 @@ kubectl create clusterrolebinding default --clusterrole cluster-admin --servicea
 
 kubectl -n default create sa jenkins
 kubectl get pods -n jenkins
-kubectl get pods -n jenkins jenkins-deployment-84797b8db5-b8pjw --output=jsonpath={.spec.serviceAccount} && echo
+kubectl get pods -n jenkins jenkins-deployment-* --output=jsonpath={.spec.serviceAccount} && echo
 
 printenv |grep -i kubernetes_serv
 KUBERNETES_SERVICE_PORT_HTTPS=443

@@ -28,3 +28,18 @@ spec:
       targetPort: 8080
   externalIPs:
     - 192.168.39.36
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-jnlp
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50000
+      targetPort: 50000
+  selector:
+    app: jenkins

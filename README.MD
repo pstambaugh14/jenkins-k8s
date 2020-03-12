@@ -23,7 +23,9 @@ This project uses the following technologies:
 # New Goals:
 - Clean up Code and Make more Universally configured.
 - Configure DNS Entry for Jenkins Deployment Master.
-- Reconfigure to deploy Jenkins slaves. 
+- Reconfigure to deploy Jenkins slaves.
+- Add service port (API) 50000 for TLS agent.
+- Map/Bind port 8888 to Jenkins SSHD server.
 
 -----------------------------------------------------------------------------------------------------------------------------
 

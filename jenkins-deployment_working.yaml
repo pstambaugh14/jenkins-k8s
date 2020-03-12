@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  namespace: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      volumes:
+      - name: jenks-pv-storage
+        persistentVolumeClaim:
+          claimName: jenks-pv-claim
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins:lts
+#        resources:
+#            limits:
+#              cpu: 2000m
+#              memory: 746m
+#            requests:
+#              cpu: 100m
+#              memory: 512m
+        ports:
+        - name: jenks-master-port
+          containerPort: 8080
+        - name: jnlp-port
+          containerPort: 50000
+        volumeMounts:
+        - name: jenks-pv-storage
+          mountPath: "/var/jenkins_home"
+        env:
+        - name: JAVA_OPTS
+          value: "-Xms512m -Xmx2048m"

@@ -4,3 +4,5 @@ service_connect_working.sh
 pod_alive_check.sh
 volume_recycle.yaml
 jenkins-service_working.yaml
+Dockerfile-*
+empty-test-file

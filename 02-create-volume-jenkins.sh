@@ -1,6 +1,7 @@
 #!/bin/bash
 volvar=kubectl get pv |grep -i jenk | awk '{ print $ 1}'
-if [[ $volvar =~ '^jenk*' ]]; then
+#if [[ $volvar =~ '^jenk*' ]]; then
+if [[ "$nsvar" != 'jenkins' ]]; then  
   echo "Volume does not Exist, Will Create Volume..."
   kubectl create -f jenkins-volume.yaml
 else

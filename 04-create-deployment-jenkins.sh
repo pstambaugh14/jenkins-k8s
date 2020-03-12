@@ -1,6 +1,7 @@
 #!/bin/bash
 pod_exists=`kubectl get pods -n jenkins | grep -i jenkins | awk '{ print $1 }'`
-if [[ $pod_exists =~ '^jenkins*' ]]; then
+#if [[ $pod_exists =~ '^jenkins*' ]]; then
+if [[ "$nsvar" != 'jenkins' ]]; then 
   echo "Pod does not Exist, Will Create Pods via Deployment..."
   kubectl create -f jenkins-deployment.yaml
 else

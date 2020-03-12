@@ -1,2 +1,3 @@
 jenkins_libvirt_connect.txt
 playbook_*
+service_connect_working.sh

@@ -1,4 +1,5 @@
 #!/bin/bash
+#EXECUTES AFTER POD DEPLOYMENTS FINALIZE
 echo "Getting the Jenkins accessible IP address... "
 hostip=`kubectl get pods -n jenkins -o yaml | grep -i hostip | awk '{ print $2 }'`
 echo "$hostip is the IP address of the Jenkins service."
@@ -7,23 +8,13 @@ echo "Getting the Jenkins accessible Port... "
 serviceport=`kubectl get service -n jenkins -o json |grep -i nodePort | awk '{ print $ 2 }' | sed 's/\,//g' | head -n 01`
 echo "$serviceport is the port used by Jenkins service."
 echo ""
-url="http://$hostip:$serviceport"
-echo "Access $url to visit your Jenkins instance!"
+url='http://'$hostip':'$serviceport''
+echo "Access '$url' to visit your Jenkins instance!"
 echo ""
 echo ""
-
-#sleep 5
-
-#ADD HERE - WHEN POD IS AVAILABLE, EXECUTE:
-#podvar=`kubectl get pods -n jenkins | awk '{ print $ 1}' |grep -i jenkins`
-#kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins
-#kubectl get rs -w -n jenkins
-#kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins
-
 
 read -n1 -sp "Would you like to open Jenkins in your default browser? Press 'y' for 'Yes', 'n' for 'No'... [y,n]" browseyesno
 echo ""
-
 
 while true;
 do

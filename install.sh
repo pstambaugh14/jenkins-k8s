@@ -7,5 +7,7 @@
 ./04-create-deployment-jenkins.sh
 ./05-create-service-jenkins.sh
 ./06-create-SA-jenkins.sh
+clear
 #./environment
-kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins && ./jenks_service_connect.sh && ./jenks_init_pw.sh
+kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins && ./jenks_init_pw.sh
+./jenks_service_connect.sh

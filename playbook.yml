@@ -4,37 +4,25 @@
   gather_facts: true
   #vars_prompt:
 #
-#    - name: brwsrpromptansvar
-#      prompt: "Would you care to open the Jenkins instance through your default browser after installation is completed?"
+#    - name: prompt1
+#      prompt: "question one"
 #      private: no
 #
-#    - name: username
-#      prompt: "What is your Mongodb username?"
+#    - name: prompt2
+#      prompt: "question two"
 #      private: no
 #
-#    - name: password
-#      prompt: "What is your Mongodb password?"
-###
-  #vars:
-    #brwsrpromptansvar: {{ brwsrpromptansvar }}
-#    hostip: "{{ hostip }}"
-#    serviceport: "{{ serviceport }}"
-#    url: "{{ url }}"
-#    pods_exist: "{{ pod_exists }}"
-
-#    remote_install_path: /opt/test/MERN-AUTH-ANSIBLE
-    ###
+#    - name: prompt3
+#      prompt: "private question"
+#
+#  vars:
+#    prompt1: "{{ prompt1 }}"
+#    prompt2: "{{ prompt2 }}"
+#    prompt3: "{{ prompt3 }}"
+#    remote_install_path: /path/destination
+#    
 #    PWD:
   tasks:
-  - name: Gather configs and environment vars
-    shell: ./environment.sh
-#  - name: Echo Environment Variables via Debug
-#    echo: "Starting..."
-    #echo: '"{{ hostip }}" "{{ serviceport }}" "{{ url }}" "{{ pod_exists }}"'
-  - debug: msg="{{ lookup('env','hostip') }} is an environment variable"
-  - debug: msg="{{ lookup('env','serviceport') }} is an environment variable"
-  - debug: msg="{{ lookup('env','url') }} is an environment variable"
-  - debug: msg="{{ lookup('env','brwsrpromptansvar') }} is an environment variable"
   - name: Create Namespace for Jenkins
     shell: ./01-create-ns-jenkins.sh
   - name: Create Volume for Jenkins
@@ -47,20 +35,5 @@
     shell: ./05-create-service-jenkins.sh
   - name: Create Service Account for Jenkins
     shell: ./06-create-SA-jenkins.sh
-  - name: Test phase for vars being passed.
-    debug: msg="{{ lookup('env','brwsrpromptansvar') }} is an environment variable"
-  - name: Echo Message
-    echo: "To connect to your Jenkins instance in Browser run the following: './service_connect.sh'"
 #  - name: Get the URL of Jenkins and Open in Browser
 #    shell: ./service_connect.sh
-#  - name: Complete!
-#    shell: echo "All is complete, now run ./service_connect.sh to easily find your Jenkins URL."
-#  - name: Printenv
-#    shell: printenv
-#  - name: Display URL to access new Jenkins instance on k8s!
-#    shell: echo 'Access $url to visit your Jenkins instance!'
-#    environment:
-      #brwsrpromptansvar: "{{ brwsrpromptansvar|quote }}"
-#      hostip: "{{ hostip }}"
-#      serviceport: "{{ serviceport }}"
-#      url: "{{ url }}"

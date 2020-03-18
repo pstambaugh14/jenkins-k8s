@@ -13,3 +13,5 @@ echo ""
 url="http://$hostip:$serviceport"
 export url=$url
 echo "Access $url to visit your Jenkins instance!"
+sleep 1
+xdg-open $url

@@ -7,7 +7,8 @@ eval $(minikube docker-env)
 ./04-create-deployment-jenkins.sh
 ./05-create-service-jenkins.sh
 ./06-create-SA-jenkins.sh
-./jenks_service_connect.sh
+#./jenks_service_connect.sh
+./service_connect_working.sh
 
 
 #echo "Your initial setup admin password is located in the jenkins pod at: /mnt/vda1/jenkins/secrets/initialAdminPassword"

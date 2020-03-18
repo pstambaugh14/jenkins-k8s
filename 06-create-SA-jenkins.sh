@@ -5,8 +5,10 @@ if [[ $savar =~ '^jenk*' ]]; then
   echo "Service Account does not Exist, Will Create Service Account..."
   kubectl -n kube-system create sa jenkins
   kubectl -n default create sa jenkins
+  kubectl -n jenkins create sa jenkins
+  kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=kube-system:jenkins
+  kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=default:jenkins
   kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:jenkins
-  kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
 else
   echo "Service Account already exists... exiting"
 #  break

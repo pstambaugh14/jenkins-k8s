@@ -12,6 +12,14 @@ echo "Access $url to visit your Jenkins instance!"
 echo ""
 echo ""
 
+#sleep 5
+
+#ADD HERE - WHEN POD IS AVAILABLE, EXECUTE:
+#podvar=`kubectl get pods -n jenkins | awk '{ print $ 1}' |grep -i jenkins`
+#kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins
+#kubectl get rs -w -n jenkins
+
+
 read -n1 -sp "Would you like to open Jenkins in your default browser? Press 'y' for 'Yes', 'n' for 'No'... [y,n]" browseyesno
 echo ""
 

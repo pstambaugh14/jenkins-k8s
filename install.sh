@@ -8,5 +8,4 @@
 ./05-create-service-jenkins.sh
 ./06-create-SA-jenkins.sh
 #./environment
-./jenks_service_connect.sh
-sleep 5
+kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins && ./jenks_service_connect.sh && ./jenks_init_pw.sh

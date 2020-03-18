@@ -28,7 +28,7 @@ spec:
 #              cpu: 100m
 #              memory: 512m
         ports:
-        - name: jenks-master-port
+        - name: jenks-mr-port
           containerPort: 8080
         - name: jnlp-port
           containerPort: 50000

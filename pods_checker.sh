@@ -1,68 +1,117 @@
 #!/bin/bash
-read -p "What is the namespace? " nsvar
+#kubectl get ns
+#read -p "What is the namespace? " nsvar
+#echo "$nsvar"
+#sleep 1
+#clear
+echo "Listing the current directory YAML files... "
+ls -la $PWD | grep -i .yaml
+read -p "What is the name of the .yaml file to be deployed?: " yaml
+echo $yaml
+echo "Grabbing the name of the namespace from the provided YAML file... "
+sleep 1
+nsvar=`cat $yaml | grep -i namespace: | awk '{ print $2 }'`
+#echo "$yaml"
 echo "$nsvar"
+#clear
+#Name of the type: Deployment or Pod
+echo "Grabbing the type of deployment/pod...: "
+sleep 1
+appvar=`cat $yaml | grep -i kind: | awk '{ print $2 }'`
+appvar=${appvar,,}
+echo $appvar
+#Name of the Deployment or Pod
+echo "Grabbing the name of the deployment/pod...: "
+sleep 1
+namevar=`cat $yaml | grep -i name: | head -n 01 | awk '{ print $2 }'`
+echo "namevar"
+sleep 1
+echo "Done. Moving onto the next steps...: "
 clear
-ls -la $PWD
-read -p "What is the name of the yaml file to be deployed?" yaml
-clear
-echo "$yaml"
-
-#exists2=`kubectl get deployments -n $nsvar | grep -i $1 | awk '{ print $1 }'`
-
-
-read -p "If it is a '<DEPLOYMENT>' press '[1]' for a '<POD>' press '[2]'" deppod
-
-deppod () {
-i=$1
-for i in {1..2}
-do
- if [[ $1 -eq "1" ]]; then
-kubectl get deployments -n $2
-read -p "Please enter the name of the deployment: " depvar
-elif [[ $1 -eq "2" ]]; then
-kubectl get pods -n $2
-read -p "Please enter the name of the pod: " podvar
-else
-  echo "Please Enter a "1" for a Deployment or a "2" for a Pod" $(deppod)
-fi
-done
-}
-
-deppod $deppod $nsvar
-
 
 deploy () {
 #  return 55
-  while [[ $1 -eq "1" || "2" ]]; do
-    exists=`kubectl get deployments -n $2 | grep -i $3 | awk '{ print $1 }'`
+  #while [[ $1 -eq "1" || "2" ]]; do
+  while true; do
+    exists=`kubectl get $2 -n $1 | grep -i $3 | awk '{ print $1 }'`
+    #kubectl get deployments -n $1 | grep -i $2 | awk '{ print $1 }'
     if [[ $exists == $3 ]]; then
-      echo "Pod Already Exists, Deleting Previous Pod & Creating a New One..."
-      kubectl delete deployment -n $2 $1 && kubectl create -f $4 -n $2
-    elif [[ $exists != $3 ]]; then
-      echo "Deployment does not Exist, Will Create Deployment..."
-      kubectl create -f deployment $4 -n $2
-    else
-      pod $nsvar $podvar $deppod $file
+      echo "$3 Already Exists, Deleting Previous $2 & Creating a New One..."
+      kubectl delete $2 -n $1 $3 && kubectl create -f $4
+      break
+    else [[ $exists != $3 ]];
+      echo "$3 does not Exist, Will Create $2..."
+      kubectl create -f $2 $4
+      break
+    #else
+      #echo "There is something wrong... Please check configuration. "
+      #pod $nsvar $podvar $deppod $file
+      #continue
    fi
  done
 }
 
-deploy $deppod $nsvar $depvar $file
+#deploy $deppod $nsvar $depvar $file
+deploy $nsvar $appvar $namevar $yaml
 
-pod () {
-  exists=`kubectl get pods -n $1 | grep -i $2 | awk '{ print $1 }'`
-  while [[ $3 == "2" ]]; do
-    if [[ $exists == $2 ]]; then
-      echo "Pod Already Exists, Deleting Previous Pod & Creating a New One..."
-      kubectl delete pod $2 -n $1 && kubectl create -f $4 -n $1
-    elif [[ $exists != $2 ]]; then
-      echo "Deployment does not Exist, Will Create Deployment..."
-      kubectl create -f pod $4 -n $1
-    else
-      echo "Improper Value - Restarting the Script... " $(deploy)
-   fi
-done
-}
+#exists2=`kubectl get deployments -n $nsvar | grep -i $1 | awk '{ print $1 }'`
+
+#while true; do
+#read -p "If it is a '<DEPLOYMENT>' press '[1]' for a '<POD>' press '[2]'" deppod
+#if [[ $appvar == "deployment" ]]; then
+  #kubectl get deployments -n $nsvar
+  #break
+#elif [[ $appvar == "pod" ]]; then
+  #kubectl get pods -n $nsvar
+  #break
+#else
+#  echo "Please press a "1" or a "2"...: "
+  #echo "Something is wrong. Please check script configuration... "
+  #clear
+  #continue
+#fi
+#done
+
+#deppod () {
+#i=$1
+#while true;
+#for i in {1..2}
+#do
+# if [[ $1 -eq "1" ]]; then
+#kubectl get deployments -n $2
+#exists=`kubectl get deployments -n $nsvar | grep -i .. | awk '{ print $1 }'`
+#exists=`kubectl get deployments -n $nsvar | grep -i $appvar | awk '{ print $1 }'`
+#read -p "Please enter the name of the deployment: " depvar
+#break
+#elif [[ $1 -eq "2" ]]; then
+#kubectl get pods -n $2
+#exists=`kubectl get pods -n $nsvar | grep -i .. | awk '{ print $1 }'`
+#exists=`kubectl get deployments -n $nsvar | grep -i $appvar | awk '{ print $1 }'`
+#read -p "Please enter the name of the pod: " podvar
+#break
+#else
+  #echo "Please Enter a "1" for a Deployment or a "2" for a Pod" #$(deppod)
+  #continue
+#fi
+#done
+#}
+
+#deppod $deppod $nsvar
+
+#pod () {
+  #exists=`kubectl get pods -n $1 | grep -i $2 | awk '{ print $1 }'`
+  #while [[ $3 == "2" ]]; do
+    #if [[ $exists == $2 ]]; then
+      #echo "Pod Already Exists, Deleting Previous Pod & Creating a New One..."
+      #kubectl delete pod $2 -n $1 && kubectl create -f $4 -n $1
+    #elif [[ $exists != $2 ]]; then
+      #echo "Deployment does not Exist, Will Create Deployment..."
+      #kubectl create -f pod $4 -n $1
+    #else
+      #echo "Improper Value - Restarting the Script... " $(deploy)
+#   fi
+#done
+#}
 
 #pod $nsvar $podvar $deppod $file
 

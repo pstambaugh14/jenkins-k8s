@@ -17,7 +17,7 @@ echo "Creating Service Accounts for Jenkins if they don't already exist..."
 echo "Executing Post-Installation Scripts..."
 sleep 3
 #./environment
-kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins && ./jenks_init_pw.sh
+kubectl rollout status deployment.v1.apps/jenkins-deployment -n jenkins && sleep 1 && ./jenks_init_pw.sh
 sleep 3
 echo "Executing Validation scripts..."
 ./jenks_service_connect.sh
